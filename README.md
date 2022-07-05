@@ -1,4 +1,5 @@
 # tic-tac-toe
 
-hooolll
-gfdhgfj
+just update ttt :
+stop a infinite loop.
+yay 

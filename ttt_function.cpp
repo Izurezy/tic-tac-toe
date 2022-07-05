@@ -90,7 +90,7 @@ void take_turn(int Player1turn, int Player2turn, bool isPlayer2turn){
             
         }//Makes sure that the box is not filled.
         else if(board[0] == "O" || board[0] == "X" && Player1turn == 1 || Player2turn == 1){
-               
+               retry = true; 
                 is_filled(Player1turn, Player2turn, isPlayer2turn, retry); 
             } 
         
