@@ -13,7 +13,7 @@ void greeting(){
     std::cout << "================\n";
     std::cout << "   TIC TAC TOE\n";
     std::cout << "================\n";
-    std::cout << "Player 1 is X and Player 2 is O";
+    std::cout << "Player 1 is X and Player 2 is O\n";
     std::cout << "Cout the boxs then type the number you want to put X/O\n";
 
 }
