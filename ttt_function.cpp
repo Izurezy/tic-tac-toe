@@ -3,7 +3,6 @@
 #include <vector>
  std::vector<bool> filled_up = {false,false,false,false,false,false,false,false,false};
  std::vector<std::string> board = {" "," "," "," "," "," "," "," "," "};
- bool retry = false;
  
                                 //  0   1   2   3   4   5   6   7   8 index.
  int winner = 0;
@@ -50,49 +49,49 @@ void is_winner(){
 
      
 }
-
-void is_filled(int Player1turn,int Player2turn,int isPlayer2turn, bool retry1){
-
-            //Checking if a box is filled or not, and is make the player repick a box. 
-            while(retry1 == true ){
-            std::cout << "The box is filled please pick another one.\n";    
-            if(isPlayer2turn == false){
-                std::cout << "player1";
-                std::cin >> Player1turn;
-            }
-            else{
-                
-                std::cin >> Player2turn;
-            }
-            }
-}
-
-//checking what box to put Player 1 "X"
-void take_turn(int Player1turn, int Player2turn, bool isPlayer2turn){
-      
+//checking what box to put Player "X/O"
+void take_turn(int Boxnumber,bool isPlayer2turn){
         
+       Boxnumber--;
         //fill box if player enters 1.
-        if(Player1turn == 1 && board[0] == " "  || Player2turn == 1 && board[0] == " "){
-            retry = false;
-            if(Player1turn == 1){
+        if(board[Boxnumber] == " "  || board[Boxnumber] == " "){
+            if(isPlayer2turn == false){
 
-                board[0] = 'X';
-                filled_up[0] = true;
+                board[Boxnumber] = 'X';
+                filled_up[Boxnumber] = true;
                 draw();
                
             }
-            else if(Player2turn == 1){
-                std::cout << "1112";
-                board[0] = 'O';
-                filled_up[0] = true;
+            else if(isPlayer2turn == true){
+                
+                board[Boxnumber] = 'O';
+                filled_up[Boxnumber] = true;
                 draw();
             }
             
-        }//Makes sure that the box is not filled.
-        else if(board[0] == "O" || board[0] == "X" && Player1turn == 1 || Player2turn == 1){
-               retry = true; 
-                is_filled(Player1turn, Player2turn, isPlayer2turn, retry); 
-            } 
-        
+        }  
         
 }
+
+void is_filled(int Boxnumber,int isPlayer2turn){
+               Boxnumber--;
+            //Checking if a box is filled or not, and is make the player repick a box. 
+    if(board[Boxnumber] == "X" || board[Boxnumber] == "O"){
+        
+            std::cout << "The box is filled please pick another one.\n";    
+        if(isPlayer2turn == false ){
+                
+            std::cout << "player1";
+            std::cin >> Boxnumber;
+            
+            take_turn(Boxnumber, isPlayer2turn);
+        }
+        else{
+            std::cout << "ooddf";
+            std::cin >> Boxnumber;
+            take_turn(Boxnumber, isPlayer2turn);
+                
+        }
+    }
+}
+

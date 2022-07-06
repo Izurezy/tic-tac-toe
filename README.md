@@ -1,12 +1,12 @@
 # tic-tac-toe
 
+Welcome to the Game tic tac toe.
 
+## Fixed
 
-## Subheader
-Fixs
 endline on greeting
 stop a infinite loop.
 
 ## Local Development
 
-Working on Board for play able content.
+reworked the board system.
