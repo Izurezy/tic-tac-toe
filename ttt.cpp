@@ -5,21 +5,26 @@
 
 int main(){
     int PlayAgain = 0;
-    int Player1turn;
-    int Player2turn;
+    int Boxnumber;
     bool isPlayer2turn = false;
 
     greeting();
     draw();
     while(PlayAgain == 0){
         //Player 1 turn
-     std::cout << "Player 1 turn\n";
-     std::cin >> Player1turn; isPlayer2turn = false;
-     take_turn(Player1turn, Player2turn, isPlayer2turn);
+        std::cout << "Player 1 turn\n";
+        std::cin >> Boxnumber; isPlayer2turn = false;
+        is_filled(Boxnumber, isPlayer2turn);
+        take_turn(Boxnumber, isPlayer2turn);
+        
+        //Makes sure that the box is not already filled.       
+        
         
         //Player 2 turn
-     std::cout << "Player 2 turn\n";
-     std::cin >> Player2turn; isPlayer2turn = true;
-     take_turn(Player1turn, Player2turn, isPlayer2turn);
+        std::cout << "Player 2 turn\n";
+        std::cin >> Boxnumber; isPlayer2turn = true;
+        is_filled(Boxnumber, isPlayer2turn);
+        take_turn(Boxnumber, isPlayer2turn);
+        
     }
 }
