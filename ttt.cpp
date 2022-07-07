@@ -11,5 +11,5 @@ int main(){
     draw();
         //Players turn
       
-        take_turn(Boxnumber, isPlayer2turn); 
+        take_turn(Boxnumber, isPlayer2turn);
 } 
