@@ -1,9 +1,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
- std::vector<bool> filled_up = {false,false,false,false,false,false,false,false,false};
- std::vector<std::string> board = {" "," "," "," "," "," "," "," "," "};
- int Player1turns = 0;
+std::vector<bool> filled_up = {false,false,false,false,false,false,false,false,false};
+std::vector<std::string> board = {" "," "," "," "," "," "," "," "," "};
+int Player1turns = 0;
+bool winner = false;
+bool Draw = false;
                                 //  0   1   2   3   4   5   6   7   8 index.
  
 
@@ -14,8 +16,9 @@ void greeting(){
     std::cout << "================\n";
     std::cout << "Player 1 is X and Player 2 is O\n";
     std::cout << "Cout the boxs then type the number you want to put X/O\n";
-    draw();
+    
 }
+
 
 void draw(){
    
@@ -40,9 +43,10 @@ void draw(){
 
 }
 
+
+
 //checking what box to put Player "X/O"
-void take_turn(int Boxnumber,bool isPlayer2turn){
-        
+void set_position(int Boxnumber,bool isPlayer2turn){
        Boxnumber--;
         //fill box if player enters 1.
         if(board[Boxnumber] == " "  || board[Boxnumber] == " "){
@@ -65,8 +69,17 @@ void take_turn(int Boxnumber,bool isPlayer2turn){
         
 }
 
+
+
 void if_filled(int Boxnumber,int isPlayer2turn){
                Boxnumber--;
+               for(int i = 0; i < board.size(); i++){
+
+                    if(board[i] != " "){
+
+                        filled_up[i] = true;
+                    }
+               }
             //Checking if a box is filled or not, and is make the player repick a box. 
     if(board[Boxnumber] == "X" || board[Boxnumber] == "O"){
         
@@ -76,27 +89,99 @@ void if_filled(int Boxnumber,int isPlayer2turn){
             std::cout << "Player1.\n";
             std::cin >> Boxnumber;
             
-            take_turn(Boxnumber, isPlayer2turn);
+            set_position(Boxnumber, isPlayer2turn);
         }
         else{
              std::cout << "Player2.\n";
             std::cin >> Boxnumber;
-            take_turn(Boxnumber, isPlayer2turn);
+            set_position(Boxnumber, isPlayer2turn);
                 
         }
     }
 }
 
+
+
 //checking if A player won.
-void is_winner(int PlayAgain){
-   
-    if(board[0] == "X" && board[1] == "X" && board[2] == "X" || board[0] == "O" && board[1] == "O" && board[2] == "O"){
-
-        std::cout << "you won";
-        PlayAgain = false;
+void is_winner(int Boxnumber){
+    
+    //horziontal 
+    if((board[0] == board[1]) && (board[1] == board[2]) && board[0] != " "){
+        winner = true;
     }
-   
-   
+    else if((board[3] == board[4]) && (board[4] == board[5]) && board[3] != " "){
+        winner = true;
+    }
+    else if((board[6] == board[7]) && (board[7] == board[8]) && board[6] != " "){
+        winner = true;
+    }
+    //vertical
+    else if ((board[0] == board[3]) && (board[3] == board[6]) && board[0] != " "){
+        winner = true;
+    }
+    else if ((board[1] == board[4]) && (board[4] == board[7]) && board[1] != " "){
+        winner = true;
+    }
+    else if ((board[2] == board[5]) && (board[5] == board[8]) && board[2] != " "){
+        winner = true;
+    }
+    //diagonals
+    else if ((board[0] == board[4]) && (board[4] == board[8]) && board[0] != " "){
+        winner = true;
+    }
+    else if ((board[2] == board[4]) && (board[4] == board[6]) && board[2] != " "){
+        winner = true;
+    }
 
-     
+}
+
+
+
+void end_game(){
+
+    for(int i = 0; i < filled_up.size(); i++){
+
+        if(filled_up[i] == true){
+            Draw = true;
+        }
+    }
+    if(winner == true){
+
+        std::cout << "You won";
+    }
+    else if(winner == false && Draw == true && Player1turns == 5){
+
+       std::cout << "Draw Nobody wins";
+        
+    }
+}
+
+
+
+void take_turn(int Boxnumber, int isPlayer2turn){
+    while(winner == false || Draw == true){
+        //Player 1 turn
+        end_game();
+        is_winner(Boxnumber);
+        
+        std::cout << "Player 1 turn\n";
+        std::cin >> Boxnumber; isPlayer2turn = false;
+        if_filled(Boxnumber, isPlayer2turn);
+        set_position(Boxnumber, isPlayer2turn);
+        is_winner(Boxnumber);
+        
+        
+        //Player 2 turn
+        end_game();
+        is_winner(Boxnumber);
+
+        std::cout << "Player 2 turn\n";
+        std::cin >> Boxnumber; isPlayer2turn = true;
+        if_filled(Boxnumber, isPlayer2turn);
+        set_position(Boxnumber, isPlayer2turn);
+        is_winner(Boxnumber);
+        
+
+        
+    }
 }
