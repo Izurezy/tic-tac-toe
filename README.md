@@ -9,8 +9,11 @@ stop a infinite loop.
 
 ## Added
 
-Board system (in pass commit)
+Board system. 
+Scoreing system.
 
-## Local Development
+## Next to do
 
-Making scoreing system.
+Replay ability.
+Change Player.
+

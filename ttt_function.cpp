@@ -156,11 +156,11 @@ void end_game(){
     }
     if(winner == true){
 
-        std::cout << "You won";
+        std::cout << "You won!\n";
     }
     else if(winner == false && Draw == true && Player1turns == 5){
 
-       std::cout << "Draw Nobody wins";
+       std::cout << "Draw Nobody wins\n";
         
     }
 }
@@ -168,28 +168,33 @@ void end_game(){
 
 
 void take_turn(int Boxnumber, int isPlayer2turn){
-    while(winner == false || Draw == false || stop == false){
+    while(stop == false){
         
 
         //Player 1 turn
         
+        if(stop == false){
         std::cout << "Player 1 turn\n";
         std::cin >> Boxnumber; isPlayer2turn = false;
         if_filled(Boxnumber, isPlayer2turn);
         set_position(Boxnumber, isPlayer2turn);
         is_winner();
         end_game();
-        
+        }
         
         
         //Player 2 turn
-        
+
+        if(stop == false){
         std::cout << "Player 2 turn\n";
         std::cin >> Boxnumber; isPlayer2turn = true;
         if_filled(Boxnumber, isPlayer2turn);
         set_position(Boxnumber, isPlayer2turn);
         is_winner();
         end_game();
+        }
+        
+        
 
     }
 }
