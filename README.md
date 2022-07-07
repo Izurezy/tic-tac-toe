@@ -4,9 +4,16 @@ Welcome to the Game tic tac toe.
 
 ## Fixed
 
-endline on greeting
+endline on greeting.
 stop a infinite loop.
 
-## Local Development
+## Added
 
-reworked the board system.
+Board system. 
+Scoreing system.
+
+## Next to do
+
+Replay ability.
+Change Player.
+
