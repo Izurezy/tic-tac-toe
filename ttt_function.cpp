@@ -168,7 +168,7 @@ void end_game(){
 
 
 void take_turn(int Boxnumber, int isPlayer2turn){
-    while(winner == false || Draw == false){
+    while(winner == false || Draw == false || stop == false){
         
 
         //Player 1 turn
