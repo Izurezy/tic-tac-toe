@@ -170,7 +170,6 @@ void end_game(){
 void take_turn(int Boxnumber, int isPlayer2turn){
     while(stop == false){
         
-
         //Player 1 turn
         
         if(stop == false){
@@ -194,7 +193,5 @@ void take_turn(int Boxnumber, int isPlayer2turn){
         end_game();
         }
         
-        
-
     }
 }
