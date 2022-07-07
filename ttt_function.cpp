@@ -3,9 +3,9 @@
 #include <vector>
  std::vector<bool> filled_up = {false,false,false,false,false,false,false,false,false};
  std::vector<std::string> board = {" "," "," "," "," "," "," "," "," "};
- 
+ int Player1turns = 0;
                                 //  0   1   2   3   4   5   6   7   8 index.
- int winner = 0;
+ 
 
 void greeting(){
 
@@ -14,7 +14,7 @@ void greeting(){
     std::cout << "================\n";
     std::cout << "Player 1 is X and Player 2 is O\n";
     std::cout << "Cout the boxs then type the number you want to put X/O\n";
-
+    draw();
 }
 
 void draw(){
@@ -39,16 +39,7 @@ void draw(){
 
 
 }
-//checking if player won.
-void is_winner(){
-    
-   if (winner == 1){
 
-
-   }
-
-     
-}
 //checking what box to put Player "X/O"
 void take_turn(int Boxnumber,bool isPlayer2turn){
         
@@ -59,6 +50,7 @@ void take_turn(int Boxnumber,bool isPlayer2turn){
 
                 board[Boxnumber] = 'X';
                 filled_up[Boxnumber] = true;
+                Player1turns++;
                 draw();
                
             }
@@ -73,21 +65,21 @@ void take_turn(int Boxnumber,bool isPlayer2turn){
         
 }
 
-void is_filled(int Boxnumber,int isPlayer2turn){
+void if_filled(int Boxnumber,int isPlayer2turn){
                Boxnumber--;
             //Checking if a box is filled or not, and is make the player repick a box. 
     if(board[Boxnumber] == "X" || board[Boxnumber] == "O"){
         
-            std::cout << "The box is filled please pick another one.\n";    
+            std::cout << "The box is filled please pick another one,";    
         if(isPlayer2turn == false ){
                 
-            std::cout << "player1";
+            std::cout << "Player1.\n";
             std::cin >> Boxnumber;
             
             take_turn(Boxnumber, isPlayer2turn);
         }
         else{
-            std::cout << "ooddf";
+             std::cout << "Player2.\n";
             std::cin >> Boxnumber;
             take_turn(Boxnumber, isPlayer2turn);
                 
@@ -95,3 +87,16 @@ void is_filled(int Boxnumber,int isPlayer2turn){
     }
 }
 
+//checking if A player won.
+void is_winner(int PlayAgain){
+   
+    if(board[0] == "X" && board[1] == "X" && board[2] == "X" || board[0] == "O" && board[1] == "O" && board[2] == "O"){
+
+        std::cout << "you won";
+        PlayAgain = false;
+    }
+   
+   
+
+     
+}

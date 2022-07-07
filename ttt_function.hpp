@@ -1,6 +1,6 @@
 #include <iostream>
 void greeting();
-void is_winner();
 void draw();
+void is_winner(int PlayAgain);
 void take_turn(int boxnumber, bool isPlayer2turn);
-void is_filled(int Boxnumber,int isPlayer2turn);
+void if_filled(int Boxnumber,int isPlayer2turn);
