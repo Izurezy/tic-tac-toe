@@ -10,10 +10,11 @@ stop a infinite loop.
 ## Added
 
 Board system.\
-Scoreing system.
+Scoreing system.\
+Replay ability.
+
 
 ## Next to do
 
-Replay ability.\
 Change Player.
 

@@ -3,9 +3,10 @@
 #include <vector>
 std::vector<bool> filled_up = {false,false,false,false,false,false,false,false,false};
 std::vector<std::string> board = {" "," "," "," "," "," "," "," "," "};
+std::string y_n = " ";
 int Player1turns = 0;
 bool winner = false;
-bool Draw = false;
+bool Draw = false; 
 bool stop = false;
                                 //  0   1   2   3   4   5   6   7   8 index.
  
@@ -74,13 +75,7 @@ void set_position(int Boxnumber,bool isPlayer2turn){
 
 void if_filled(int Boxnumber,int isPlayer2turn){
                Boxnumber--;
-               for(int i = 0; i < board.size(); i++){
-
-                    if(board[i] != " "){
-
-                        filled_up[i] = true;
-                    }
-               }
+              
             //Checking if a box is filled or not, and is make the player repick a box. 
     if(board[Boxnumber] == "X" || board[Boxnumber] == "O"){
         
@@ -145,9 +140,8 @@ void is_winner(){
 }
 
 
-
-void end_game(){
-
+void end_game(int Boxnumber, bool isPlayer2turn){
+     
     for(int i = 0; i < filled_up.size(); i++){
 
         if(filled_up[i] == true){
@@ -155,19 +149,41 @@ void end_game(){
         }
     }
     if(winner == true){
-
+       
         std::cout << "You won!\n";
+        std::cout << "Do you wish yo play again? y/n\n";
+        std::cin >> y_n;
+        
     }
     else if(winner == false && Draw == true && Player1turns == 5){
 
        std::cout << "Draw Nobody wins\n";
+        std::cout << "Do you wish yo play again? y/n\n";
+        std::cin >> y_n;
         
+    }
+
+    if(y_n == "y"){
+        
+        filled_up = {false,false,false,false,false,false,false,false,false};
+        board = {" "," "," "," "," "," "," "," "," "};
+        y_n = ' ';
+        Player1turns = 0;
+        winner = false;
+        Draw = false; 
+        stop = false;
+        greeting();
+        draw();
+        
+    }
+    else if(y_n == "n"){
+        std::cout << "Byeee\n";
     }
 }
 
 
 
-void take_turn(int Boxnumber, int isPlayer2turn){
+void take_turn(int Boxnumber, bool isPlayer2turn){
     while(stop == false){
         
         //Player 1 turn
@@ -178,7 +194,7 @@ void take_turn(int Boxnumber, int isPlayer2turn){
         if_filled(Boxnumber, isPlayer2turn);
         set_position(Boxnumber, isPlayer2turn);
         is_winner();
-        end_game();
+        end_game(Boxnumber, isPlayer2turn);
         }
         
         
@@ -190,8 +206,12 @@ void take_turn(int Boxnumber, int isPlayer2turn){
         if_filled(Boxnumber, isPlayer2turn);
         set_position(Boxnumber, isPlayer2turn);
         is_winner();
-        end_game();
+        end_game(Boxnumber, isPlayer2turn);
         }
         
     }
 }
+
+
+ 
+
