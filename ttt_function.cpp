@@ -4,7 +4,9 @@
 std::vector<bool> filled_up = {false,false,false,false,false,false,false,false,false};
 std::vector<std::string> board = {" "," "," "," "," "," "," "," "," "};
 std::string y_n = " ";
+std::string change_y_n = " ";
 int Player1turns = 0;
+bool changePlayer = false;
 bool winner = false;
 bool Draw = false; 
 bool stop = false;
@@ -16,8 +18,18 @@ void greeting(){
     std::cout << "================\n";
     std::cout << "   TIC TAC TOE\n";
     std::cout << "================\n";
-    std::cout << "Player 1 is X and Player 2 is O\n";
     std::cout << "Cout the boxs then type the number you want to put X/O\n";
+    std::cout << "Player 1 X or O\n";
+    std::cin >> change_y_n;
+
+    if(change_y_n == "O" || change_y_n == "o"){
+
+        changePlayer = true;
+    }
+    else if(change_y_n == "X" || change_y_n == "x"){
+
+        changePlayer = false;
+    }
     
 }
 
@@ -49,29 +61,41 @@ void draw(){
 
 //checking what box to put Player "X/O"
 void set_position(int Boxnumber,bool isPlayer2turn){
-       Boxnumber--;
-        //fill box if player enters 1.
-        if(board[Boxnumber] == " "  || board[Boxnumber] == " "){
-            if(isPlayer2turn == false){
+     Boxnumber--;
+    //fill box if player enters 1.
+    if(board[Boxnumber] == " "  || board[Boxnumber] == " "){
+        if(isPlayer2turn == false){
+            if(changePlayer == false){
+                   
+                board[Boxnumber] = 'X';
+                filled_up[Boxnumber] = true;
+                Player1turns++;
+                draw();
+            }
+            else{
+
+                board[Boxnumber] = 'O';
+                filled_up[Boxnumber] = true;
+                draw();
+            }
+        }
+        else if(isPlayer2turn == true){
+            if(changePlayer == true){
 
                 board[Boxnumber] = 'X';
                 filled_up[Boxnumber] = true;
                 Player1turns++;
                 draw();
-               
-            }
-            else if(isPlayer2turn == true){
-                
+            } 
+            else{
+
                 board[Boxnumber] = 'O';
                 filled_up[Boxnumber] = true;
                 draw();
-            }
-            
-        }  
-        
+            }         
+        }        
+    }
 }
-
-
 
 void if_filled(int Boxnumber,int isPlayer2turn){
                Boxnumber--;
@@ -142,7 +166,7 @@ void is_winner(){
 
 void end_game(int Boxnumber, bool isPlayer2turn){
      
-    for(int i = 0; i < filled_up.size(); i++){
+    for(int i = 0;i < filled_up.size(); i++){
 
         if(filled_up[i] == true){
             Draw = true;
